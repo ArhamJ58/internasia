@@ -151,7 +151,7 @@ export default function AdvertisePage() {
       </div>
 
       {/* Why advertise here */}
-      <div className="card" className="advertise-split" style={{ padding: "40px 48px" }}>
+      <div className="card advertise-split" style={{ padding: "40px 48px" }}>
         <div>
           <p className="label-overline" style={{ marginBottom: 12 }}>Why InternAsia</p>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 700, color: "var(--text)", margin: "0 0 16px" }}>
