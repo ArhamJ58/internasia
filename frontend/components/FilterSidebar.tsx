@@ -228,8 +228,6 @@ export default function FilterSidebar({ filters, onChange, options, asDrawer, on
               color: "var(--text-3)", letterSpacing: "0.06em",
               textTransform: "uppercase", transition: "color 0.15s", padding: 0,
             }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#ef4444")}
-              onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
             >
               <X size={10} /> Clear
             </button>

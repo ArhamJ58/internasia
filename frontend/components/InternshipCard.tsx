@@ -58,11 +58,9 @@ export default function InternshipCard({ job }: { job: Internship }) {
         position: 'relative',
         transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s',
       }}
-      onMouseEnter={e => {
         (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
         (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.5)';
       }}
-      onMouseLeave={e => {
         (e.currentTarget as HTMLElement).style.transform = '';
         (e.currentTarget as HTMLElement).style.boxShadow = '';
       }}
@@ -89,8 +87,6 @@ export default function InternshipCard({ job }: { job: Internship }) {
               WebkitBoxOrient: 'vertical', overflow: 'hidden',
               transition: 'color 0.15s',
             }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text)')}
             >
               {job.title}
             </h3>
@@ -148,8 +144,6 @@ export default function InternshipCard({ job }: { job: Internship }) {
             fontSize: 12, fontWeight: 600, color: 'var(--gold)',
             textDecoration: 'none', transition: 'opacity 0.15s',
           }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
-          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           onClick={e => e.stopPropagation()}
         >
           Apply <ExternalLink size={11} />

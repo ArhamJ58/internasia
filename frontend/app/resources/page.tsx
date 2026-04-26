@@ -79,13 +79,11 @@ export default function ResourcesPage() {
                     height: '100%',
                     cursor: 'pointer',
                   }}
-                    onMouseEnter={e => {
                       const el = e.currentTarget as HTMLElement;
                       el.style.borderColor = 'var(--gold-dim)';
                       el.style.transform = 'translateY(-2px)';
                       el.style.boxShadow = '0 0 24px rgba(240,180,41,0.1)';
                     }}
-                    onMouseLeave={e => {
                       const el = e.currentTarget as HTMLElement;
                       el.style.borderColor = 'var(--border)';
                       el.style.transform = '';
@@ -117,8 +115,6 @@ export default function ResourcesPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           {GUIDES.map(g => (
             <div key={g.title} className="card" style={{ padding: '24px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, cursor: 'pointer', transition: 'all 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hi)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; }}
             >
               <div>
                 <p style={{ fontWeight: 600, color: 'var(--text)', fontSize: 14, margin: '0 0 6px' }}>{g.title}</p>

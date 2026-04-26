@@ -59,8 +59,6 @@ export default function AffiliateBanner({ context = "listing", internshipId }: P
               color: aff.accent, textDecoration: 'none',
               transition: 'opacity 0.15s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.65')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
             {link.name} →
           </a>
