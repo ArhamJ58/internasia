@@ -1,8 +1,4 @@
-import axios from "axios";
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-
-export const api = axios.create({ baseURL: API_URL });
 
 export interface Internship {
   id: string;
@@ -40,72 +36,54 @@ export interface InternshipsResponse {
   results: Internship[];
   page: number;
   count: number;
-  total: number;   // total matching rows (for pagination)
+  total: number;
+}
+
+async function apiFetch(path: string, options?: RequestInit) {
+  const res = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: { "Content-Type": "application/json", ...(options?.headers || {}) },
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw Object.assign(new Error(err.detail || "API error"), { response: { data: err } });
+  }
+  return res.json();
 }
 
 export async function fetchInternships(filters: Filters = {}): Promise<InternshipsResponse> {
-  const params = Object.fromEntries(
-    Object.entries(filters).filter(([, v]) => v !== undefined && v !== "" && v !== null)
-  );
-  const { data } = await api.get("/internships", { params });
-  return data as InternshipsResponse;
+  const params = new URLSearchParams();
+  Object.entries(filters).forEach(([k, v]) => { if (v !== undefined && v !== "" && v !== null) params.set(k, String(v)); });
+  return apiFetch(`/internships?${params.toString()}`);
 }
 
 export async function fetchInternship(id: string): Promise<Internship> {
-  const { data } = await api.get(`/internships/${id}`);
-  return data as Internship;
+  return apiFetch(`/internships/${id}`);
 }
 
 export async function fetchStats() {
-  const { data } = await api.get("/internships/stats/summary");
-  return data as {
-    total_active: number;
-    new_last_24h: number;
-    by_country: Record<string, number>;
-    by_source: Record<string, number>;
-  };
+  return apiFetch("/internships/stats/summary");
 }
 
 export async function fetchFilters() {
-  const { data } = await api.get("/filters");
-  return data as { countries: string[]; industries: string[]; languages: string[]; sources: string[] };
+  return apiFetch("/filters");
 }
 
 export async function createAlert(alert: {
-  email: string;
-  name?: string;
-  country?: string;
-  industry?: string;
-  language?: string;
-  paid_only?: boolean;
-  keywords?: string;
-  frequency?: string;
+  email: string; name?: string; country?: string; industry?: string;
+  language?: string; paid_only?: boolean; keywords?: string; frequency?: string;
 }) {
-  const { data } = await api.post("/alerts", alert);
-  return data;
+  return apiFetch("/alerts", { method: "POST", body: JSON.stringify(alert) });
 }
 
-export async function submitJobPost(job: {
-  company_name: string;
-  contact_email: string;
-  contact_name?: string;
-  role_title: string;
-  location_country: string;
-  location_city?: string;
-  industry?: string;
-  is_paid: boolean;
-  stipend_range?: string;
-  language_required: string;
-  description: string;
-  apply_url: string;
-  duration_weeks?: number;
-  tier: "standard" | "featured";
-  message?: string;
-}) {
-  const { data } = await api.post("/jobs/submit", job);
-  return data;
+export async function submitJobPost(job: object) {
+  return apiFetch("/jobs/submit", { method: "POST", body: JSON.stringify(job) });
 }
 
-export async function trackAffiliateClick(affiliate: string, source: string, internshipId?: string) {
-  api.post("/affiliate/click", { affiliate, source, internship_id: internshipId || null }).catch(() => {});
+export function trackAffiliateClick(affiliate: string, source: string, internshipId?: string) {
+  fetch(`${API_URL}/affiliate/click`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ affiliate, source, internship_id: internshipId || null }),
+  }).catch(() => {});
 }
