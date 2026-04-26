@@ -55,8 +55,6 @@ export default function Navbar() {
                 border: "1px solid transparent",
                 transition: "all 0.15s",
               }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(240,180,41,0.06)"; e.currentTarget.style.color = "var(--gold)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--gold-dim)"; }}
               >
                 {icon} {label}
               </Link>

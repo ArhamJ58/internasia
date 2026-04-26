@@ -78,8 +78,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   key={l.href}
                   href={l.href}
                   style={{ color: "var(--text-3)", fontSize: 13, textDecoration: "none", transition: "color 0.15s" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-3)")}
                 >
                   {l.label}
                 </a>
