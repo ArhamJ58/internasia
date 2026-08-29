@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold: #dbb300;
+    --gold-light: #f0d34e;
+    --gold-deep: #a9860b;
+    --shell-x: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ivory text-ink font-sans;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: #0b0b0c;
+  }
+
+  /* A single hairline used everywhere a rule is needed. */
+  hr {
+    @apply border-0 h-px bg-ivory-300;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: theme('maxWidth.shell');
+    margin-inline: auto;
+    padding-inline: var(--shell-x);
+  }
+
+  /* Small letter-spaced label used above most section headings. */
+  .eyebrow {
+    @apply font-sans text-[0.62rem] uppercase tracking-luxe text-gold-deep;
+  }
+
+  .eyebrow-on-dark {
+    @apply font-sans text-[0.62rem] uppercase tracking-luxe text-gold;
+  }
+
+  .display {
+    @apply font-display font-light leading-[0.95];
+    font-variant-ligatures: common-ligatures;
+  }
+
+  /* Brushed-metal fill for display type. */
+  .text-lustre {
+    background: linear-gradient(
+      100deg,
+      var(--gold-deep) 0%,
+      var(--gold) 22%,
+      var(--gold-light) 40%,
+      #fff6d0 50%,
+      var(--gold-light) 60%,
+      var(--gold) 78%,
+      var(--gold-deep) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: lustre 9s ease-in-out infinite;
+  }
+
+  /* Underline that grows from the left on hover. */
+  .link-rule {
+    @apply relative inline-block;
+  }
+  .link-rule::after {
+    content: '';
+    @apply absolute left-0 -bottom-1 h-px w-full bg-current origin-right scale-x-0;
+    transition: transform 0.55s theme('transitionTimingFunction.silk');
+  }
+  .link-rule:hover::after,
+  .link-rule:focus-visible::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-3 px-8 py-4 font-sans text-[0.68rem]
+           uppercase tracking-wide2 transition-all duration-500 ease-silk;
+  }
+  .btn-solid {
+    @apply btn bg-onyx text-ivory hover:bg-gold hover:text-onyx;
+  }
+  .btn-ghost {
+    @apply btn border border-onyx/25 text-onyx hover:border-gold hover:text-gold-deep;
+  }
+  .btn-ghost-dark {
+    @apply btn border border-ivory/25 text-ivory hover:border-gold hover:text-gold;
+  }
+
+  /* Thin vertical hairline with a travelling gold glint. */
+  .rule-vert {
+    @apply relative w-px overflow-hidden bg-ivory-300;
+  }
+  .rule-vert::after {
+    content: '';
+    @apply absolute inset-x-0 h-16;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    animation: glint 5s ease-in-out infinite;
+  }
+}
+
+/* ── Keyframes ───────────────────────────────────────────── */
+
+@keyframes lustre {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes glint {
+  0% {
+    top: -4rem;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillIn {
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Scroll reveal ───────────────────────────────────────── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s theme('transitionTimingFunction.silk'),
+    transform 1s theme('transitionTimingFunction.silk');
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Per-character rise, used on the hero words. */
+[data-char] {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: charRise 1.1s theme('transitionTimingFunction.silk') forwards;
+  animation-delay: var(--char-delay, 0ms);
+}
+@keyframes charRise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal],
+  [data-char] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .text-lustre {
+    animation: none;
+    background-position: 30% 50%;
+  }
+}
