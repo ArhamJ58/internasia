@@ -228,11 +228,14 @@ export default function Gemstone({
   cut = 'brilliant',
   tint = '#EAF2F7',
   className,
+  style,
   animate = true,
 }: {
   cut?: Cut;
   tint?: string;
   className?: string;
+  /** For sizing a stone to a real measurement rather than a utility class. */
+  style?: React.CSSProperties;
   animate?: boolean;
 }) {
   const uid = useId().replace(/:/g, '');
@@ -254,7 +257,7 @@ export default function Gemstone({
   ];
 
   return (
-    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
+    <svg viewBox="0 0 200 200" className={className} style={style} aria-hidden="true">
       <defs>
         {/* Band of light that travels across the stone. */}
         <linearGradient id={`sweep-${uid}`} x1="0" y1="0" x2="1" y2="0">

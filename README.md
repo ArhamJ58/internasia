@@ -15,21 +15,29 @@ npm start       # serve the production build
 
 ## Pages
 
-| Path           | What it is                                                   |
-| -------------- | ------------------------------------------------------------ |
-| `/`            | Hero, marks band, the house, collections, craft, services     |
-| `/collections` | The four cuts, one full panel each                            |
-| `/atelier`     | Process, materials, how to commission                         |
-| `/heritage`    | The Okachimachi quarter and the house's place in it           |
-| `/contact`     | Enquiry form, address, phone, hours, transit                  |
+| Path             | What it is                                                  |
+| ---------------- | ----------------------------------------------------------- |
+| `/`              | Hero, marks band, the house, collections, craft, services    |
+| `/pieces`        | Made-to-order settings, filterable by category               |
+| `/pieces/[slug]` | One piece: specification table and enquiry                   |
+| `/collections`   | The four cuts, one full panel each                           |
+| `/guide`         | Buyer's guide — four Cs, origin, certification, sizing, care |
+| `/atelier`       | Process, materials, how to commission                        |
+| `/heritage`      | The Okachimachi quarter and the house's place in it          |
+| `/contact`       | Enquiry form, address, phone, transit                        |
 
 ## Editing the site
 
-**Nearly all copy lives in one file: `lib/content.ts`.** Company details, page
-copy, collection descriptions, services and hours are all there, and the pages
-read from it. You should not need to touch a component to change wording.
+Copy lives in three files, and the pages read from them. You should not need
+to touch a component to change wording.
 
-That file marks every claim as one of three kinds:
+| File              | What is in it                                            |
+| ----------------- | -------------------------------------------------------- |
+| `lib/content.ts`  | Company details, navigation, and the page copy           |
+| `lib/pieces.ts`   | The made-to-order pieces and their specifications        |
+| `lib/guide.ts`    | Everything in the buyer's guide                          |
+
+`lib/content.ts` marks every claim as one of three kinds:
 
 - **VERIFIED** — transcribed straight off the business card (name, address,
   phone, fax, mobile, email, president, tagline). Correct as written.
@@ -39,10 +47,15 @@ That file marks every claim as one of three kinds:
 
 ### Before launch
 
-There is **one** outstanding factual TODO:
+Two things to check, both marked `TODO` in the source:
 
-- **Opening hours** (`visit.hours` in `lib/content.ts`) are a conservative
-  guess, not something from the card. Confirm and correct them.
+- **`lib/pieces.ts`** — the five pieces are written as settings the atelier
+  makes, not as stock, and none of them carries a price. Replace them with the
+  settings you actually offer and give them your own reference numbers. The
+  header comment in that file explains what was deliberately left out and why.
+- **`certification.labs`** in `lib/guide.ts` — the four laboratories listed
+  are the ones whose reports circulate most widely in the Tokyo trade. Cut any
+  whose reports you do not actually supply.
 
 Separately, the marks band on the home page (`marks`) deliberately avoids the
 claims a jewellery site usually leads with — year founded, certifications,
@@ -86,6 +99,44 @@ The photograph then replaces the drawn stone everywhere that collection
 appears — the home page grid and the collections page panel — and is served
 through `next/image`. Collections without an `image` keep the drawing, so you
 can switch them over one at a time.
+
+## Selling on the site
+
+Right now every piece reads **price on request** and the buttons open an
+enquiry. That is deliberate rather than a limitation: a made-to-order setting
+has no single price until a stone is chosen, so a fixed number would be
+misleading, and inventing prices for a real company is not something to do
+casually.
+
+There are three ways forward, in increasing order of work:
+
+**1. Show prices, keep enquiries.** Set `priceFrom` on a piece in
+`lib/pieces.ts` and it renders as "from ¥…" instead. Nothing else changes.
+Good for setting expectations without committing to a checkout.
+
+**2. Sell specific stones.** This is the real change, and it is a data problem
+before it is a code one. Selling a stone means listing *that* stone — its
+weight, grades, certificate number and photographs — and taking it down the
+moment it sells. That needs inventory someone keeps current, not a static
+file. Practically: move `pieces` behind a CMS or a spreadsheet sync, and add
+the fields a buyer needs (carat, colour, clarity, cut grade, certificate
+number, price).
+
+**3. Take payment.** Two routes, and the choice is mostly about who handles
+tax, shipping and card compliance:
+
+- **Stripe** — keep this site as it is and add Stripe Checkout. Least
+  disruption, and the design stays entirely yours. You handle inventory,
+  order emails and shipping yourself.
+- **Shopify** — move the catalogue into Shopify and keep this site as the
+  storefront through their Storefront API. More to set up, but you get
+  inventory, orders, tax, shipping and Japanese payment methods (konbini,
+  PayPay, bank transfer) without building any of it.
+
+For fine jewellery at these prices, be aware that most sales still close in
+person. An enquiry flow that reliably books an appointment is often worth more
+than a checkout that rarely completes — worth deciding deliberately rather
+than by default.
 
 ## The enquiry form
 

@@ -205,21 +205,13 @@ export const services = [
 export const visit = {
   title: 'Visit',
   body: 'The atelier is a working room, not a shop floor. Appointments are preferred so a bench and good daylight are free when you arrive.',
-  /**
-   * TODO — confirm these with the atelier before launch. They are the only
-   * unverified factual claim left on the site; the values below are a
-   * conservative guess, not something taken from the business card.
-   */
-  hours: [
-    { days: 'Monday – Friday', time: '10:00 – 18:00' },
-    { days: 'Saturday', time: 'By appointment' },
-    { days: 'Sunday & holidays', time: 'Closed' },
-  ],
   transit: 'Okachimachi Station (JR) · Ueno-okachimachi (Toei Ōedo) · Naka-okachimachi (Tokyo Metro Hibiya)',
 } as const;
 
 export const nav = [
+  { label: 'Pieces', href: '/pieces' },
   { label: 'Collections', href: '/collections' },
+  { label: 'Guide', href: '/guide' },
   { label: 'Atelier', href: '/atelier' },
   { label: 'Heritage', href: '/heritage' },
   { label: 'Contact', href: '/contact' },

@@ -59,7 +59,7 @@ export default function Nav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-7 lg:flex xl:gap-9" aria-label="Main">
           {nav.map((item) => {
             const active = pathname === item.href;
             return (
@@ -79,7 +79,7 @@ export default function Nav() {
           })}
           <a
             href={`tel:${company.tel.replace(/-/g, '')}`}
-            className={`font-sans text-[0.68rem] uppercase tracking-wide2 transition-colors duration-500 ${
+            className={`hidden font-sans text-[0.68rem] uppercase tracking-wide2 transition-colors duration-500 xl:block ${
               overHero ? 'text-gold' : 'text-gold-deep'
             }`}
           >
@@ -92,7 +92,7 @@ export default function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[7px] md:hidden"
+          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[7px] lg:hidden"
         >
           {[0, 1].map((i) => (
             <span
@@ -109,7 +109,7 @@ export default function Nav() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-40 bg-onyx transition-all duration-700 ease-silk md:hidden ${
+        className={`fixed inset-0 z-40 bg-onyx transition-all duration-700 ease-silk lg:hidden ${
           open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
@@ -118,7 +118,7 @@ export default function Nav() {
             <Link
               key={item.href}
               href={item.href}
-              className="font-display text-5xl font-light text-ivory transition-colors duration-500 hover:text-gold"
+              className="font-display text-4xl font-light text-ivory transition-colors duration-500 hover:text-gold sm:text-5xl"
               style={{
                 transitionDelay: open ? `${120 + i * 70}ms` : '0ms',
                 opacity: open ? 1 : 0,

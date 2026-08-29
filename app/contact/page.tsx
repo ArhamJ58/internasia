@@ -94,18 +94,6 @@ export default function ContactPage() {
 
               <hr className="my-9 bg-ivory/10" />
 
-              <h2 className="eyebrow-on-dark">Hours</h2>
-              <dl className="mt-5 space-y-3 font-sans text-sm">
-                {visit.hours.map((h) => (
-                  <div key={h.days} className="flex justify-between gap-4">
-                    <dt className="text-ivory/50">{h.days}</dt>
-                    <dd className="text-ivory/80">{h.time}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <hr className="my-9 bg-ivory/10" />
-
               <h2 className="eyebrow-on-dark">Nearest stations</h2>
               <p className="mt-5 font-sans text-sm leading-relaxed text-ivory/55">
                 {visit.transit}
