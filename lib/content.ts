@@ -3,11 +3,16 @@
  *
  * ─────────────────────────────────────────────────────────────
  *  VERIFIED  — transcribed directly from the company business card.
- *  REVIEW    — written to be true of the house but not independently
+ *  REVIEW    — written to be true of the business but not independently
  *              confirmed. Read these before launch and adjust freely.
- *  TODO      — facts only Saii Jewels can supply. Placeholder values are
- *              marked and are deliberately conservative; search this file
- *              for "TODO" to find every one.
+ *  TODO      — facts only Saii Jewels can supply. Search for "TODO".
+ *
+ *  WHAT THE BUSINESS IS: a jewellery trading house in Higashi-Ueno
+ *  (Okachimachi), Tokyo — wholesale supply to the trade, and retail to
+ *  private clients. It buys and sells loose diamonds, coloured gemstones
+ *  and finished jewellery. It does NOT run a workshop and does not
+ *  manufacture: there is no bench, no setting, no polishing. Nothing on
+ *  this site should claim otherwise.
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -31,7 +36,7 @@ export const company = {
     postalCode: '110-0015',
     country: 'Japan',
     ja: '〒110-0015 東京都台東区東上野1-24-2 山茂ビル502号室',
-    // Higashi-Ueno / Okachimachi is Tokyo's historic jewellery quarter.
+    // Higashi-Ueno / Okachimachi is Tokyo's jewellery trading quarter.
     district: 'Okachimachi, Tokyo',
   },
   tel: '03-5846-8313',
@@ -48,171 +53,113 @@ export const hero = {
   eyebrow: 'Higashi-Ueno · Tokyo',
   headline: ['Timeless.', 'Elegant.', 'Saii.'],
   subhead:
-    'A Tokyo jewellery house working in diamonds, coloured gemstones and precious metal — where every piece is selected, set and finished by hand.',
-  ctaPrimary: { label: 'View Collections', href: '/collections' },
-  ctaSecondary: { label: 'Visit the Atelier', href: '/contact' },
+    'A jewellery house in Okachimachi, Tokyo — supplying loose diamonds, coloured gemstones and finished jewellery to the trade and to private clients.',
+  ctaPrimary: { label: 'View the collection', href: '/collection' },
+  ctaSecondary: { label: 'Get in touch', href: '/contact' },
 } as const;
 
 /**
  * The four marks on the home page band.
  *
- * Every entry here is deliberately something already true of the house, so
- * nothing unverified is stated on a public page. The claims a jewellery site
- * would normally lead with — year founded, certification bodies, number of
- * pieces — are exactly the ones only Saii Jewels can confirm, so they are
- * left out rather than guessed at.
+ * Every entry is something already true of the business, so nothing
+ * unverified appears on a public page. The claims a jewellery site usually
+ * leads with — year founded, certifications, volumes — are exactly the ones
+ * only Saii Jewels can confirm, so they are left out rather than guessed at.
  *
  * To add one once confirmed, replace an entry below. A purely numeric
- * `value` animates upward as it scrolls into view; anything else is shown
- * as written. For example:
+ * `value` counts up as it scrolls into view; anything else is shown as
+ * written. For example:
  *
- *   { value: 'Est. 1998', label: 'Founded in Tokyo' },
- *   { value: '30', label: 'Years at the bench' },
- *   { value: 'GIA', label: 'Certified diamonds' },
+ *   { value: 'Est. 1998', label: 'Trading in Tokyo' },
+ *   { value: '30', label: 'Years in the quarter' },
  */
 export const marks = [
-  { value: 'Tokyo', label: 'Higashi-Ueno atelier' },
-  { value: 'Okachimachi', label: 'The jewellery quarter' },
-  { value: '4', label: 'Signature cuts' },
-  { value: 'By hand', label: 'Set and finished in-house' },
+  { value: 'Tokyo', label: 'Okachimachi quarter' },
+  { value: 'Wholesale', label: 'Supply to the trade' },
+  { value: 'Retail', label: 'Private clients, by appointment' },
+  { value: 'Loose & set', label: 'Stones and finished jewellery' },
 ] as const;
 
-export type Collection = {
-  slug: string;
-  name: string;
-  nameJa: string;
-  stone: 'brilliant' | 'emerald' | 'marquise' | 'pear';
-  caption: string;
-  body: string;
-  /** Tint the drawn stone is shaded from, and the wash behind it. */
-  accent: string;
-  /**
-   * Optional photograph. Drop a file into `public/images/` and set this to
-   * its path (e.g. '/images/solitaire.jpg') and it replaces the drawn stone
-   * everywhere that collection appears. Leave it out to keep the drawing.
-   */
-  image?: string;
-  /** Alt text for `image`. Required whenever an image is set. */
-  imageAlt?: string;
-};
-
-export const collections: Collection[] = [
-  {
-    slug: 'solitaire',
-    name: 'Solitaire',
-    nameJa: 'ソリテール',
-    stone: 'brilliant',
-    caption: 'The single stone, uninterrupted',
-    body: 'A brilliant cut asks for nothing around it. Our solitaire settings are drawn to disappear — fine claws, a knife-edge shank, and a gallery cut away so light reaches the pavilion from every side.',
-    accent: '#EAF2F7',
-  },
-  {
-    slug: 'emerald-line',
-    name: 'The Emerald Line',
-    nameJa: 'エメラルド',
-    stone: 'emerald',
-    caption: 'Step cuts, long shadows',
-    body: 'Step cuts reward stillness. Broad tables and parallel facets trade fire for clarity, and the eye travels straight down into the stone. Set in platinum, framed by nothing at all.',
-    accent: '#CFE6D8',
-  },
-  {
-    slug: 'marquise',
-    name: 'Marquise',
-    nameJa: 'マーキス',
-    stone: 'marquise',
-    caption: 'Length, drawn to a point',
-    body: 'A marquise lengthens the hand. Cut long and finished at two fine points, it is the most demanding shape to set well — and the most rewarding when the symmetry is exact.',
-    accent: '#F3E3EC',
-  },
-  {
-    slug: 'pear',
-    name: 'Pear',
-    nameJa: 'ペアシェイプ',
-    stone: 'pear',
-    caption: 'Half brilliant, half repose',
-    body: 'One rounded shoulder, one point. The pear carries the fire of a brilliant and the calm of a drop, and it hangs beautifully — which is why it has never left the pendant.',
-    accent: '#F6EEDC',
-  },
-];
-
-export const craft = {
-  title: 'The Atelier',
-  intro:
-    'Saii Jewels works from Higashi-Ueno, the quarter of Tokyo where the city has traded stones for generations. Everything below happens within walking distance of our door.',
-  steps: [
-    {
-      n: '01',
-      title: 'Selection',
-      body: 'Stones are chosen loose, in daylight, one at a time. Colour, cut and clarity are judged in the hand before anything is committed to a design.',
-    },
-    {
-      n: '02',
-      title: 'Design',
-      body: 'A drawing is made to the stone rather than the other way round. Proportion, finger fit and the way light will enter the pavilion are all settled on paper first.',
-    },
-    {
-      n: '03',
-      title: 'Setting',
-      body: 'Claws are cut and closed by hand under magnification. A setting is right when the stone sits dead level and no metal interrupts the return of light.',
-    },
-    {
-      n: '04',
-      title: 'Finish',
-      body: 'Polishing is the last and longest stage. Every surface a finger will find is worked until the piece feels finished from the inside out.',
-    },
-  ],
-} as const;
-
-export const heritage = {
-  title: 'A house in Okachimachi',
-  lede: 'Higashi-Ueno has been Tokyo’s jewellery quarter for longer than anyone trading in it today. Saii Jewels keeps a workshop in the middle of it.',
-  paragraphs: [
-    'The streets around Okachimachi are unusual: within a few blocks sit the stone dealers, the casters, the setters and the polishers who between them make most of the fine jewellery sold in Japan. A house that works here has the whole trade at arm’s length — and no distance to hide behind.',
-    'Saii Jewels was built in that setting, and works the way the quarter works: stones bought loose and judged by eye, pieces made to order rather than to a catalogue, and the same hands on a commission from the first drawing to the final polish.',
-    'The result is a small output and a long relationship. Most of what leaves the atelier was designed for one person, and a good number of our clients have come back across a generation.',
-  ],
-  /**
-   * Written as a house line rather than a personal quote — attributing words
-   * to a named person needs that person to have said them. Swap in a real
-   * quote from Sandeep Jain and change `attribution` to his name when you
-   * have one.
-   */
-  quote: {
-    text: 'A stone is only ever as good as the light you let into it.',
-    attribution: 'Saii Jewels, Higashi-Ueno',
-  },
-} as const;
+/* ── What the business does ───────────────────────────────── */
 
 export const services = [
   {
-    title: 'Bespoke commissions',
-    body: 'A piece designed around a stone you bring, or one we source for you. Drawings first, then wax, then metal.',
+    title: 'Wholesale supply',
+    body: 'Loose stones and finished jewellery supplied to jewellers, retailers and other dealers. Trade terms and volume pricing on request.',
   },
   {
-    title: 'Bridal',
-    body: 'Engagement rings and wedding bands, sized and set to the pair. Discretion assumed throughout.',
+    title: 'Retail',
+    body: 'Private clients are welcome by appointment. The same stock as the trade sees, shown and explained without a shop floor in the way.',
   },
   {
-    title: 'Loose stones',
-    body: 'Diamonds and coloured gemstones selected from the Okachimachi trade, viewed in daylight at the atelier.',
+    title: 'Loose diamonds & gemstones',
+    body: 'Diamonds and coloured stones held loose, natural and laboratory-grown, viewed in daylight and supplied with their reports.',
   },
   {
-    title: 'Restoration',
-    body: 'Re-setting, re-tipping and re-polishing of inherited pieces, with the original character kept intact.',
+    title: 'Sourcing to order',
+    body: 'A specific weight, colour, clarity or shape that is not in stock is found through the quarter. Tell us the brief and the budget.',
   },
 ] as const;
 
-export const visit = {
-  title: 'Visit',
-  body: 'The atelier is a working room, not a shop floor. Appointments are preferred so a bench and good daylight are free when you arrive.',
-  transit: 'Okachimachi Station (JR) · Ueno-okachimachi (Toei Ōedo) · Naka-okachimachi (Tokyo Metro Hibiya)',
+/* ── About ────────────────────────────────────────────────── */
+
+export const about = {
+  title: 'A house in Okachimachi',
+  lede: 'Higashi-Ueno has been Tokyo’s jewellery quarter for longer than anyone trading in it today. Saii Jewels has its office in the middle of it.',
+  paragraphs: [
+    'The streets around Okachimachi are unusual: within a few blocks sit the stone dealers, the importers, the manufacturers and the wholesalers who between them move most of the fine jewellery sold in Japan. A business that works here sees what is available first, and pays what the trade pays.',
+    'Saii Jewels buys and sells in that market. Loose diamonds and coloured gemstones, and finished jewellery, supplied to jewellers and retailers across Japan and shown to private clients at the office by appointment.',
+    'What a trading house is actually for is judgement — knowing which stone is worth its certificate, which is over-graded, and what a fair price looks like on the day. That is the part you cannot get from a listing, and it is the reason the same buyers come back.',
+  ],
+  /**
+   * Written as a house line rather than a personal quote — attributing words
+   * to a named person requires that person to have said them. Swap in a real
+   * quote from Sandeep Jain and change `attribution` to his name.
+   */
+  quote: {
+    text: 'A stone is only ever as good as the light you let into it.',
+    attribution: 'Saii Jewels, Okachimachi',
+  },
 } as const;
 
+/** Why the location matters — replaces the old workshop process copy. */
+export const quarter = {
+  title: 'Why the quarter matters',
+  lede: 'Okachimachi concentrates in a few blocks what most countries spread across a whole industry. Buying inside it changes what is available and what it costs.',
+  points: [
+    {
+      title: 'Selection',
+      body: 'Stones are seen loose and in person before anything is committed to. What does not measure up in the hand never reaches a client.',
+    },
+    {
+      title: 'Price',
+      body: 'Buying where the trade buys removes the layers between the stone and the buyer. That margin stays with the client rather than the chain.',
+    },
+    {
+      title: 'Speed',
+      body: 'A specific brief — a weight, a colour, a shape — can usually be answered from within the quarter rather than from overseas.',
+    },
+    {
+      title: 'Judgement',
+      body: 'Two stones with the same certificate are rarely the same stone. Knowing which is which is the whole job, and it is learned here.',
+    },
+  ],
+} as const;
+
+/* ── Visit ────────────────────────────────────────────────── */
+
+export const visit = {
+  title: 'Visit',
+  body: 'The office is in the middle of the Okachimachi quarter. Appointments are preferred so there is time to lay stones out properly and see them in daylight.',
+  transit:
+    'Okachimachi Station (JR) · Ueno-okachimachi (Toei Ōedo) · Naka-okachimachi (Tokyo Metro Hibiya)',
+} as const;
+
+/* ── Navigation ───────────────────────────────────────────── */
+
 export const nav = [
-  { label: 'Pieces', href: '/pieces' },
-  { label: 'Collections', href: '/collections' },
-  { label: 'Guide', href: '/guide' },
-  { label: 'Atelier', href: '/atelier' },
-  { label: 'Heritage', href: '/heritage' },
+  { label: 'Collection', href: '/collection' },
+  { label: 'Education', href: '/education' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ] as const;

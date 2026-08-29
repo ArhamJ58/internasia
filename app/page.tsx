@@ -2,14 +2,8 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import Gemstone from '@/components/Gemstone';
 import { Reveal, Parallax } from '@/components/Motion';
-import {
-  SectionHeading,
-  Marks,
-  CollectionsPreview,
-  QuoteBand,
-  ContactCta,
-} from '@/components/Sections';
-import { craft, heritage, services } from '@/lib/content';
+import { SectionHeading, Marks, CollectionPreview, QuoteBand, ContactCta } from '@/components/Sections';
+import { about, quarter, services } from '@/lib/content';
 
 export default function HomePage() {
   return (
@@ -17,7 +11,7 @@ export default function HomePage() {
       <Hero />
       <Marks />
 
-      {/* ── Opening statement ──────────────────────────────── */}
+      {/* ── Who we are ─────────────────────────────────────── */}
       <section className="bg-ivory py-32">
         <div className="shell grid gap-20 lg:grid-cols-[1fr_0.85fr] lg:items-center">
           <div>
@@ -25,21 +19,21 @@ export default function HomePage() {
               eyebrow="The house"
               title={
                 <>
-                  Made where Tokyo
+                  Where Tokyo
                   <br />
-                  <span className="italic">keeps its stones</span>
+                  <span className="italic">buys its stones</span>
                 </>
               }
-              lede={heritage.lede}
+              lede={about.lede}
             />
             <Reveal delay={220}>
               <p className="mt-7 max-w-xl font-sans text-base leading-relaxed text-muted">
-                {heritage.paragraphs[0]}
+                {about.paragraphs[0]}
               </p>
             </Reveal>
             <Reveal delay={300}>
-              <Link href="/heritage" className="btn-ghost mt-10">
-                Read the heritage
+              <Link href="/about" className="btn-ghost mt-10">
+                About the house
               </Link>
             </Reveal>
           </div>
@@ -77,36 +71,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CollectionsPreview />
+      <CollectionPreview />
 
-      {/* ── Craft steps ────────────────────────────────────── */}
+      {/* ── Why the quarter matters ────────────────────────── */}
       <section className="bg-ivory py-32">
         <div className="shell">
           <SectionHeading
             align="center"
-            eyebrow="Craft"
+            eyebrow="Why here"
             title={
               <>
-                From loose stone
+                Buying where
                 <br />
-                <span className="italic">to finished piece</span>
+                <span className="italic">the trade buys</span>
               </>
             }
-            lede={craft.intro}
+            lede={quarter.lede}
           />
 
           <div className="mt-24 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
-            {craft.steps.map((step, i) => (
-              <Reveal key={step.n} delay={i * 110}>
-                <div className="group relative">
-                  <span className="display text-6xl text-ivory-300 transition-colors duration-700 group-hover:text-gold/45">
-                    {step.n}
-                  </span>
-                  <h3 className="mt-4 font-display text-2xl font-normal text-onyx">
-                    {step.title}
-                  </h3>
+            {quarter.points.map((point, i) => (
+              <Reveal key={point.title} delay={i * 110}>
+                <div className="group">
+                  <h3 className="font-display text-2xl font-normal text-onyx">{point.title}</h3>
                   <span className="mt-5 block h-px w-12 bg-gold-deep/35 transition-all duration-700 ease-silk group-hover:w-24 group-hover:bg-gold" />
-                  <p className="mt-5 font-sans text-sm leading-relaxed text-muted">{step.body}</p>
+                  <p className="mt-5 font-sans text-sm leading-relaxed text-muted">{point.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -114,12 +103,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <QuoteBand text={heritage.quote.text} attribution={heritage.quote.attribution} />
+      <QuoteBand text={about.quote.text} attribution={about.quote.attribution} />
 
       {/* ── Services ───────────────────────────────────────── */}
       <section className="bg-ivory py-32">
         <div className="shell">
-          <SectionHeading eyebrow="What we do" title="Services" />
+          <SectionHeading eyebrow="What we do" title="Trade and retail" />
           <div className="mt-20 divide-y divide-ivory-300 border-y border-ivory-300">
             {services.map((s, i) => (
               <Reveal key={s.title} delay={i * 80}>

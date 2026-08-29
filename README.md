@@ -1,7 +1,13 @@
 # Saii Jewels
 
 Website for **Saii Jewels Co., Ltd.** (サイイ ジュエルズ株式会社) — a jewellery
-house in Higashi-Ueno, Taito-ku, Tokyo.
+house in Higashi-Ueno (Okachimachi), Taito-ku, Tokyo.
+
+**What the business is:** a jewellery trading house. It buys and sells loose
+diamonds, coloured gemstones and finished jewellery — wholesale to the trade,
+retail to private clients. It does **not** manufacture: there is no workshop,
+no bench, no setting or polishing. Nothing on this site should ever claim
+otherwise, and the copy is written to keep that line clear.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS. Every page is
 statically prerendered, so the whole site can be served from a CDN.
@@ -15,27 +21,25 @@ npm start       # serve the production build
 
 ## Pages
 
-| Path             | What it is                                                  |
-| ---------------- | ----------------------------------------------------------- |
-| `/`              | Hero, marks band, the house, collections, craft, services    |
-| `/pieces`        | Made-to-order settings, filterable by category               |
-| `/pieces/[slug]` | One piece: specification table and enquiry                   |
-| `/collections`   | The four cuts, one full panel each                           |
-| `/guide`         | Buyer's guide — four Cs, origin, certification, sizing, care |
-| `/atelier`       | Process, materials, how to commission                        |
-| `/heritage`      | The Okachimachi quarter and the house's place in it          |
-| `/contact`       | Enquiry form, address, phone, transit                        |
+| Path                | What it is                                                |
+| ------------------- | --------------------------------------------------------- |
+| `/`                 | Hero, marks, the house, collection, why the quarter, services |
+| `/collection`       | What the business supplies, filterable by category         |
+| `/collection/[slug]`| One item: specification table and enquiry                  |
+| `/education`        | Four Cs, shapes, origin, certificates, metals, sizing, care |
+| `/about`            | Okachimachi, the trade, leadership                         |
+| `/contact`          | Enquiry form, address, phone, transit                      |
 
 ## Editing the site
 
 Copy lives in three files, and the pages read from them. You should not need
 to touch a component to change wording.
 
-| File              | What is in it                                            |
-| ----------------- | -------------------------------------------------------- |
-| `lib/content.ts`  | Company details, navigation, and the page copy           |
-| `lib/pieces.ts`   | The made-to-order pieces and their specifications        |
-| `lib/guide.ts`    | Everything in the buyer's guide                          |
+| File                | What is in it                                          |
+| ------------------- | ------------------------------------------------------ |
+| `lib/content.ts`    | Company details, navigation, and the page copy         |
+| `lib/collection.ts` | The items supplied and their specifications            |
+| `lib/education.ts`  | Everything in the education section                    |
 
 `lib/content.ts` marks every claim as one of three kinds:
 
@@ -49,11 +53,11 @@ to touch a component to change wording.
 
 Two things to check, both marked `TODO` in the source:
 
-- **`lib/pieces.ts`** — the five pieces are written as settings the atelier
-  makes, not as stock, and none of them carries a price. Replace them with the
-  settings you actually offer and give them your own reference numbers. The
-  header comment in that file explains what was deliberately left out and why.
-- **`certification.labs`** in `lib/guide.ts` — the four laboratories listed
+- **`lib/collection.ts`** — the six items are written as representative of
+  what the business supplies, not as live stock, and none carries a price.
+  Replace them with what you actually deal in and give them your own reference
+  numbers. The header comment explains what was left out and why.
+- **`certification.labs`** in `lib/education.ts` — the four laboratories listed
   are the ones whose reports circulate most widely in the Tokyo trade. Cut any
   whose reports you do not actually supply.
 
@@ -84,21 +88,21 @@ the sense that they are not your pieces, but they are original artwork, so
 there is no licensing question and nothing to replace in a hurry.
 
 To use real photographs instead, drop files into `public/images/` and add two
-lines to the collection in `lib/content.ts`:
+lines to the item in `lib/collection.ts`:
 
 ```ts
 {
-  slug: 'solitaire',
+  slug: 'round-brilliant-solitaire',
   // ...
   image: '/images/solitaire.jpg',
   imageAlt: 'Round brilliant solitaire in platinum',
 }
 ```
 
-The photograph then replaces the drawn stone everywhere that collection
-appears — the home page grid and the collections page panel — and is served
-through `next/image`. Collections without an `image` keep the drawing, so you
-can switch them over one at a time.
+The photograph then replaces the drawn stone everywhere that item appears —
+the home page strip, the collection grid and the item page — and is served
+through `next/image`. Items without an `image` keep the drawing, so you can
+switch them over one at a time.
 
 ## Selling on the site
 
@@ -110,15 +114,15 @@ casually.
 
 There are three ways forward, in increasing order of work:
 
-**1. Show prices, keep enquiries.** Set `priceFrom` on a piece in
-`lib/pieces.ts` and it renders as "from ¥…" instead. Nothing else changes.
+**1. Show prices, keep enquiries.** Set `priceFrom` on an item in
+`lib/collection.ts` and it renders as "from ¥…" instead. Nothing else changes.
 Good for setting expectations without committing to a checkout.
 
 **2. Sell specific stones.** This is the real change, and it is a data problem
 before it is a code one. Selling a stone means listing *that* stone — its
 weight, grades, certificate number and photographs — and taking it down the
 moment it sells. That needs inventory someone keeps current, not a static
-file. Practically: move `pieces` behind a CMS or a spreadsheet sync, and add
+file. Practically: move `items` behind a CMS or a spreadsheet sync, and add
 the fields a buyer needs (carat, colour, clarity, cut grade, certificate
 number, price).
 

@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { pieces, pieceCategories } from '@/lib/pieces';
-import PieceVisual from './PieceVisual';
+import { items, categories } from '@/lib/collection';
+import ItemVisual from './ItemVisual';
 
 const yen = new Intl.NumberFormat('ja-JP', {
   style: 'currency',
@@ -19,15 +19,15 @@ export function PriceLabel({ priceFrom, className }: { priceFrom?: number; class
   );
 }
 
-export default function PieceGrid() {
+export default function CollectionGrid() {
   const [filter, setFilter] = useState<string>('All');
-  const shown = filter === 'All' ? pieces : pieces.filter((p) => p.category === filter);
+  const shown = filter === 'All' ? items : items.filter((p) => p.category === filter);
 
   return (
     <div>
       {/* Category filter */}
-      <div className="flex flex-wrap gap-2.5" role="group" aria-label="Filter pieces by category">
-        {pieceCategories.map((c) => {
+      <div className="flex flex-wrap gap-2.5" role="group" aria-label="Filter the collection by category">
+        {categories.map((c) => {
           const on = c === filter;
           return (
             <button
@@ -51,7 +51,7 @@ export default function PieceGrid() {
         {shown.map((p, i) => (
           <Link
             key={p.slug}
-            href={`/pieces/${p.slug}`}
+            href={`/collection/${p.slug}`}
             className="group block"
             // Re-keying on filter change restarts the entrance stagger.
             style={{
@@ -64,8 +64,8 @@ export default function PieceGrid() {
                 background: `radial-gradient(120% 100% at 50% 30%, ${p.accent}22 0%, transparent 62%), #141416`,
               }}
             >
-              <PieceVisual
-                piece={p}
+              <ItemVisual
+                item={p}
                 size={55}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="transition-transform duration-[1200ms] ease-silk group-hover:-translate-y-2 group-hover:scale-[1.08]"

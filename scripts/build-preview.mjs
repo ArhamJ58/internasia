@@ -10,7 +10,7 @@
  * then the rendered markup is lifted out and the pages are stitched together
  * behind a small vanilla router. The Next.js runtime is dropped, so the
  * behaviours it provided — scroll reveals, parallax, the nav's colour states,
- * the drawer, the four-Cs tabs, the pieces filter, the counters — are
+ * the drawer, the four-Cs tabs, the collection filter, the counters — are
  * reimplemented in the inline script at the bottom of the generated file.
  *
  * Elements whose classes the real components swap at runtime are tagged with
@@ -32,8 +32,8 @@ const OUT = resolve(ROOT, 'preview/saii-jewels.html');
 const EXECUTABLE = process.env.CHROMIUM_PATH || undefined;
 
 /** slug → category, read out of the source so the filter cannot drift. */
-function pieceCategories() {
-  const src = readFileSync(resolve(ROOT, 'lib/pieces.ts'), 'utf8');
+function itemCategories() {
+  const src = readFileSync(resolve(ROOT, 'lib/collection.ts'), 'utf8');
   const map = {};
   const re = /slug:\s*'([^']+)'[\s\S]*?category:\s*'([^']+)'/g;
   let m;
@@ -41,16 +41,14 @@ function pieceCategories() {
   return map;
 }
 
-const PIECE_PATHS = Object.keys(pieceCategories()).map((slug) => `/pieces/${slug}`);
+const ITEM_PATHS = Object.keys(itemCategories()).map((slug) => `/collection/${slug}`);
 
 const PAGES = [
   '/',
-  '/pieces',
-  ...PIECE_PATHS,
-  '/collections',
-  '/guide',
-  '/atelier',
-  '/heritage',
+  '/collection',
+  ...ITEM_PATHS,
+  '/education',
+  '/about',
   '/contact',
 ].map((path) => ({
   path,
@@ -89,14 +87,14 @@ function prepare(categories) {
   }
 
   // Category on each card, so the preview filter has something to match on.
-  document.querySelectorAll('a[href^="/pieces/"]').forEach((a) => {
-    const slug = a.getAttribute('href').replace('/pieces/', '');
+  document.querySelectorAll('a[href^="/collection/"]').forEach((a) => {
+    const slug = a.getAttribute('href').replace('/collection/', '');
     if (categories[slug]) a.dataset.pvCategory = categories[slug];
   });
 }
 
 const main = async () => {
-  const categories = pieceCategories();
+  const categories = itemCategories();
   const browser = await chromium.launch({ executablePath: EXECUTABLE });
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
@@ -179,7 +177,7 @@ const main = async () => {
   // ── The four-Cs panels ─────────────────────────────────────
   // Only the live panel is ever in the DOM, so each is collected by clicking
   // its tab. All four ship and the preview toggles between them.
-  await page.goto(`${BASE}/guide`, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE}/education`, { waitUntil: 'networkidle' });
   const panels = {};
   for (const key of ['cut', 'colour', 'clarity', 'carat']) {
     await page.click(`#tab-${key}`);
@@ -199,7 +197,7 @@ const main = async () => {
     const p = document.querySelector('[role="tabpanel"]');
     if (p) p.replaceWith(document.createComment('PV_PANELS'));
   });
-  mains.guide = (await page.evaluate(() => document.querySelector('main').innerHTML)).replace(
+  mains.education = (await page.evaluate(() => document.querySelector('main').innerHTML)).replace(
     '<!--PV_PANELS-->',
     Object.values(panels).join('\n'),
   );
@@ -431,11 +429,11 @@ ${esc(footer)}
     setTab('cut');
   }
 
-  /* -- Pieces filter --------------------------------------- */
-  var piecesPage = document.querySelector('.pv-page[data-page="pieces"]');
-  if (piecesPage) {
-    var buttons = piecesPage.querySelectorAll('button[aria-pressed]');
-    var cards = piecesPage.querySelectorAll('a[data-pv-category]');
+  /* -- Collection filter ------------------------------------ */
+  var collectionPage = document.querySelector('.pv-page[data-page="collection"]');
+  if (collectionPage) {
+    var buttons = collectionPage.querySelectorAll('button[aria-pressed]');
+    var cards = collectionPage.querySelectorAll('a[data-pv-category]');
     buttons.forEach(function (b) {
       b.addEventListener('click', function () {
         var want = b.textContent.trim().toLowerCase();

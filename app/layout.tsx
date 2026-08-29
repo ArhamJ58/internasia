@@ -36,18 +36,18 @@ export const metadata: Metadata = {
     template: `%s — ${company.name}`,
   },
   description:
-    'Saii Jewels is a Tokyo jewellery house in Higashi-Ueno, working in diamonds, coloured gemstones and precious metal. Bespoke commissions, bridal and loose stones.',
+    'Saii Jewels is a jewellery house in Okachimachi, Tokyo — wholesale and retail supply of loose diamonds, coloured gemstones and finished jewellery.',
   keywords: [
     'Saii Jewels',
-    'Tokyo jewellery',
+    'Tokyo jewellery wholesale',
     'Okachimachi',
     'Higashi-Ueno',
-    'diamonds',
-    'bespoke jewellery Japan',
+    'loose diamonds Tokyo',
+    'jewellery wholesaler Japan',
   ],
   openGraph: {
     title: `${company.legalName} — ${company.tagline}`,
-    description: 'A Tokyo jewellery house in Higashi-Ueno. Diamonds, coloured gemstones, and work finished by hand.',
+    description: 'A jewellery house in Okachimachi, Tokyo. Loose diamonds, coloured gemstones and finished jewellery, wholesale and retail.',
     url: company.url,
     siteName: company.legalName,
     locale: 'en_JP',
@@ -77,6 +77,7 @@ const jsonLd = {
     addressCountry: 'JP',
   },
   founder: { '@type': 'Person', name: company.president.name },
+  areaServed: 'JP',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

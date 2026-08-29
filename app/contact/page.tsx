@@ -7,7 +7,7 @@ import { company, visit } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: `Visit the Saii Jewels atelier at ${company.address.room}, ${company.address.street}, ${company.address.city}. Appointments preferred.`,
+  description: `Visit Saii Jewels at ${company.address.room}, ${company.address.street}, ${company.address.city}. Appointments preferred.`,
 };
 
 const mapQuery = encodeURIComponent(
@@ -28,8 +28,8 @@ export default function ContactPage() {
             </Reveal>
             <Reveal delay={100}>
               <p className="mt-5 max-w-lg font-sans text-base leading-relaxed text-muted">
-                Tell us a little about what you are after and we will reply with a time. Enquiries
-                in English or Japanese are equally welcome.
+                Trade or retail, tell us what you are after and we will reply with a time.
+                Enquiries in English or Japanese are equally welcome.
               </p>
             </Reveal>
             <Reveal delay={180}>
@@ -44,7 +44,7 @@ export default function ContactPage() {
             <aside className="bg-onyx p-10 text-ivory lg:sticky lg:top-28">
               <Monogram className="h-12 w-auto text-gold" title="" />
 
-              <h2 className="eyebrow-on-dark mt-9">The atelier</h2>
+              <h2 className="eyebrow-on-dark mt-9">The office</h2>
               <address className="mt-5 not-italic font-sans text-base leading-relaxed text-ivory/75">
                 {company.address.room}
                 <br />

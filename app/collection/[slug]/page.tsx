@@ -1,40 +1,40 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import PieceVisual from '@/components/PieceVisual';
+import ItemVisual from '@/components/ItemVisual';
 import Monogram from '@/components/Monogram';
 import { Reveal } from '@/components/Motion';
-import { PriceLabel } from '@/components/PieceGrid';
-import { pieces, priceNote } from '@/lib/pieces';
+import { PriceLabel } from '@/components/CollectionGrid';
+import { items, priceNote } from '@/lib/collection';
 import { company } from '@/lib/content';
 
 type Params = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return pieces.map((p) => ({ slug: p.slug }));
+  return items.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const piece = pieces.find((p) => p.slug === slug);
-  if (!piece) return {};
+  const item = items.find((p) => p.slug === slug);
+  if (!item) return {};
   return {
-    title: piece.name,
-    description: `${piece.name} — ${piece.caption}. Made to order at the Saii Jewels atelier in Higashi-Ueno, Tokyo.`,
+    title: item.name,
+    description: `${item.name} — ${item.caption}. Supplied by Saii Jewels, Okachimachi, Tokyo.`,
   };
 }
 
-export default async function PiecePage({ params }: Params) {
+export default async function ItemPage({ params }: Params) {
   const { slug } = await params;
-  const piece = pieces.find((p) => p.slug === slug);
-  if (!piece) notFound();
+  const item = items.find((p) => p.slug === slug);
+  if (!item) notFound();
 
-  const others = pieces.filter((p) => p.slug !== piece.slug).slice(0, 3);
+  const others = items.filter((p) => p.slug !== item.slug).slice(0, 3);
 
   const enquiry = `mailto:${company.email}?subject=${encodeURIComponent(
-    `Enquiry — ${piece.name} (${piece.ref})`,
+    `Enquiry — ${item.name} (${item.ref})`,
   )}&body=${encodeURIComponent(
-    `I would like to enquire about the ${piece.name} (${piece.ref}).\n\nStone shape:\nApproximate weight:\nBudget in mind:\nRing size, if known:\n\n`,
+    `I would like to enquire about the ${item.name} (${item.ref}).\n\nStone shape:\nApproximate weight:\nBudget in mind:\nRing size, if known:\nWholesale or retail:\n\n`,
   )}`;
 
   return (
@@ -45,14 +45,14 @@ export default async function PiecePage({ params }: Params) {
             <nav aria-label="Breadcrumb" className="py-8">
               <ol className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-wide2 text-muted">
                 <li>
-                  <Link href="/pieces" className="link-rule hover:text-gold-deep">
-                    Pieces
+                  <Link href="/collection" className="link-rule hover:text-gold-deep">
+                    Collection
                   </Link>
                 </li>
                 <li aria-hidden="true" className="text-ivory-300">
                   /
                 </li>
-                <li className="text-onyx">{piece.name}</li>
+                <li className="text-onyx">{item.name}</li>
               </ol>
             </nav>
           </Reveal>
@@ -63,17 +63,17 @@ export default async function PiecePage({ params }: Params) {
               <div
                 className="relative flex aspect-square items-center justify-center overflow-hidden lg:sticky lg:top-28"
                 style={{
-                  background: `radial-gradient(110% 90% at 50% 35%, ${piece.accent}30 0%, transparent 62%), #141416`,
+                  background: `radial-gradient(110% 90% at 50% 35%, ${item.accent}30 0%, transparent 62%), #141416`,
                 }}
               >
-                <PieceVisual
-                  piece={piece}
+                <ItemVisual
+                  item={item}
                   size={60}
                   priority
                   sizes="(min-width: 1024px) 50vw, 100vw"
                 />
                 <span className="absolute left-7 top-7 font-sans text-[0.6rem] tracking-luxe text-ivory/30">
-                  {piece.ref}
+                  {item.ref}
                 </span>
               </div>
             </Reveal>
@@ -82,33 +82,33 @@ export default async function PiecePage({ params }: Params) {
             <div>
               <Reveal>
                 <p className="font-jp text-[0.66rem] tracking-wide2 text-gold-deep">
-                  {piece.nameJa}
+                  {item.nameJa}
                 </p>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="display mt-3 text-[clamp(2.4rem,5vw,3.8rem)] text-onyx">
-                  {piece.name}
+                  {item.name}
                 </h1>
               </Reveal>
               <Reveal delay={140}>
-                <p className="mt-4 font-display text-xl italic text-gold-deep">{piece.caption}</p>
+                <p className="mt-4 font-display text-xl italic text-gold-deep">{item.caption}</p>
               </Reveal>
 
               <Reveal delay={200}>
                 <div className="mt-9 flex flex-wrap items-center gap-6 border-y border-ivory-300 py-6">
                   <PriceLabel
-                    priceFrom={piece.priceFrom}
+                    priceFrom={item.priceFrom}
                     className="font-display text-2xl text-onyx"
                   />
                   <a href={enquiry} className="btn-solid">
-                    Enquire about this piece
+                    Enquire about this item
                   </a>
                 </div>
               </Reveal>
 
               <Reveal delay={260}>
                 <div className="mt-10 space-y-6">
-                  {piece.body.map((p, i) => (
+                  {item.body.map((p, i) => (
                     <p key={i} className="font-sans text-base leading-relaxed text-muted">
                       {p}
                     </p>
@@ -120,7 +120,7 @@ export default async function PiecePage({ params }: Params) {
               <Reveal delay={320}>
                 <h2 className="eyebrow mt-14">Specification</h2>
                 <dl className="mt-6 divide-y divide-ivory-300 border-y border-ivory-300">
-                  {piece.specs.map((s) => (
+                  {item.specs.map((s) => (
                     <div key={s.label} className="grid gap-1 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
                       <dt className="font-sans text-sm text-muted">{s.label}</dt>
                       <dd className="font-sans text-sm text-onyx">{s.value}</dd>
@@ -137,8 +137,8 @@ export default async function PiecePage({ params }: Params) {
 
               <Reveal delay={440}>
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <Link href="/guide" className="btn-ghost">
-                    Read the buyer’s guide
+                  <Link href="/education" className="btn-ghost">
+                    Read the education section
                   </Link>
                   <Link href="/contact" className="btn-ghost">
                     Book an appointment
@@ -150,7 +150,7 @@ export default async function PiecePage({ params }: Params) {
         </div>
       </article>
 
-      {/* Other pieces */}
+      {/* Other items */}
       <section className="relative overflow-hidden bg-onyx py-28">
         <Monogram
           className="pointer-events-none absolute -bottom-20 -right-10 h-[24rem] w-auto text-gold/[0.05]"
@@ -158,24 +158,24 @@ export default async function PiecePage({ params }: Params) {
         />
         <div className="shell relative">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <h2 className="display text-4xl text-ivory">Also from the bench</h2>
-            <Link href="/pieces" className="btn-ghost-dark">
-              All pieces
+            <h2 className="display text-4xl text-ivory">Also in the collection</h2>
+            <Link href="/collection" className="btn-ghost-dark">
+              All items
             </Link>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-3">
             {others.map((p, i) => (
               <Reveal key={p.slug} delay={i * 90}>
-                <Link href={`/pieces/${p.slug}`} className="group block">
+                <Link href={`/collection/${p.slug}`} className="group block">
                   <div
                     className="relative flex aspect-[4/5] items-center justify-center overflow-hidden"
                     style={{
                       background: `radial-gradient(120% 100% at 50% 30%, ${p.accent}22 0%, transparent 62%), #0B0B0C`,
                     }}
                   >
-                    <PieceVisual
-                      piece={p}
+                    <ItemVisual
+                      item={p}
                       size={52}
                       sizes="(min-width: 640px) 33vw, 100vw"
                       className="transition-transform duration-[1200ms] ease-silk group-hover:scale-[1.08]"

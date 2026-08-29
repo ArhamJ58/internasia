@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { company } from '@/lib/content';
 
 const INTERESTS = [
-  'Bespoke commission',
-  'Bridal',
+  'Wholesale enquiry',
+  'Retail purchase',
   'Loose stones',
-  'Restoration',
+  'Sourcing to order',
   'Something else',
 ] as const;
 
@@ -98,7 +98,7 @@ export default function EnquiryForm() {
           name="message"
           rows={5}
           required
-          placeholder="Tell us about the stone, the occasion, or the piece you have in mind."
+          placeholder="Tell us the shape, rough weight and budget you have in mind, or what you are looking to stock."
           className={`${field} mt-3 resize-none`}
         />
       </div>

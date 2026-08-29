@@ -1,18 +1,16 @@
 import type { MetadataRoute } from 'next';
 import { company } from '@/lib/content';
-import { pieces } from '@/lib/pieces';
+import { items } from '@/lib/collection';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const paths = [
     '',
-    '/pieces',
-    '/collections',
-    '/guide',
-    '/atelier',
-    '/heritage',
+    '/collection',
+    '/education',
+    '/about',
     '/contact',
-    ...pieces.map((p) => `/pieces/${p.slug}`),
+    ...items.map((p) => `/collection/${p.slug}`),
   ];
 
   return paths.map((path) => ({

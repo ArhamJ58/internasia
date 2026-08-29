@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { fourCs, colourScale, clarityScale } from '@/lib/guide';
+import { fourCs, colourScale, clarityScale } from '@/lib/education';
 import Gemstone from './Gemstone';
 
 /* ── Per-tab illustrations ───────────────────────────────── */

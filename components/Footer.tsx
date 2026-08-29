@@ -21,8 +21,8 @@ export default function Footer() {
               {company.tagline}
             </p>
             <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ivory/55">
-              A jewellery house in Higashi-Ueno, Tokyo — working in diamonds, coloured gemstones
-              and precious metal.
+              A jewellery house in Okachimachi, Tokyo — supplying loose diamonds, coloured
+              gemstones and finished jewellery.
             </p>
           </div>
 
@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="eyebrow-on-dark">Atelier</h2>
+            <h2 className="eyebrow-on-dark">Office</h2>
             <address className="mt-6 not-italic font-sans text-sm leading-relaxed text-ivory/70">
               {company.address.room}
               <br />

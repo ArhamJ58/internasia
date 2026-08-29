@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import Image from 'next/image';
-import { collections, marks, type Collection } from '@/lib/content';
-import Gemstone from './Gemstone';
+import { marks } from '@/lib/content';
+import { items, type Item } from '@/lib/collection';
+import ItemVisual from './ItemVisual';
 import Monogram from './Monogram';
 import { Reveal, Counter, Parallax } from './Motion';
 
@@ -86,48 +86,35 @@ export function Marks() {
 
 /* ── Collection card ─────────────────────────────────────── */
 
-export function CollectionCard({ item, index }: { item: Collection; index: number }) {
+export function ItemCard({ item, index }: { item: Item; index: number }) {
   return (
     <Reveal delay={index * 110}>
       <Link
-        href={`/collections#${item.slug}`}
+        href={`/collection/${item.slug}`}
         className="group relative block overflow-hidden bg-onyx-800"
       >
-        {/* Stone sits on a tinted ground and lifts on hover. */}
         <div
           className="relative flex aspect-[4/5] items-center justify-center overflow-hidden"
           style={{
             background: `radial-gradient(120% 100% at 50% 30%, ${item.accent}22 0%, transparent 62%), #141416`,
           }}
         >
-          {item.image ? (
-            <Image
-              src={item.image}
-              alt={item.imageAlt ?? item.name}
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-[1200ms] ease-silk group-hover:scale-[1.06]"
-            />
-          ) : (
-            <Gemstone
-              cut={item.stone}
-              tint={item.accent}
-              className="h-3/5 w-3/5 transition-transform duration-[1200ms] ease-silk group-hover:scale-[1.09] group-hover:-translate-y-2"
-            />
-          )}
+          <ItemVisual
+            item={item}
+            size={55}
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            className="transition-transform duration-[1200ms] ease-silk group-hover:-translate-y-2 group-hover:scale-[1.08]"
+          />
 
           {/* Gold wash that fades up from the bottom on hover. */}
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-silk group-hover:opacity-100"
-            style={{
-              background:
-                'linear-gradient(0deg, rgba(219,179,0,0.16) 0%, transparent 55%)',
-            }}
+            style={{ background: 'linear-gradient(0deg, rgba(219,179,0,0.16) 0%, transparent 55%)' }}
           />
 
-          <span className="absolute left-6 top-6 font-sans text-[0.6rem] tracking-luxe text-ivory/30">
-            {String(index + 1).padStart(2, '0')}
+          <span className="absolute left-6 top-6 font-sans text-[0.58rem] tracking-luxe text-ivory/30">
+            {item.ref}
           </span>
         </div>
 
@@ -138,7 +125,6 @@ export function CollectionCard({ item, index }: { item: Collection; index: numbe
           </h3>
           <p className="mt-2 font-sans text-sm text-ivory/45">{item.caption}</p>
 
-          {/* Rule that sweeps in from the left under the card. */}
           <span className="absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-700 ease-silk group-hover:scale-x-100" />
         </div>
       </Link>
@@ -146,34 +132,34 @@ export function CollectionCard({ item, index }: { item: Collection; index: numbe
   );
 }
 
-/* ── Collections strip ───────────────────────────────────── */
+/* ── Collection strip ────────────────────────────────────── */
 
-export function CollectionsPreview() {
+export function CollectionPreview() {
   return (
     <section className="bg-onyx py-28">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHeading
             dark
-            eyebrow="Collections"
+            eyebrow="Collection"
             title={
               <>
-                Four houses
+                Stones and
                 <br />
-                <span className="italic text-lustre">of stone</span>
+                <span className="italic text-lustre">finished jewellery</span>
               </>
             }
           />
           <Reveal delay={200}>
-            <Link href="/collections" className="btn-ghost-dark">
-              All collections
+            <Link href="/collection" className="btn-ghost-dark">
+              View the collection
             </Link>
           </Reveal>
         </div>
 
         <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {collections.map((c, i) => (
-            <CollectionCard key={c.slug} item={c} index={i} />
+          {items.slice(0, 4).map((c, i) => (
+            <ItemCard key={c.slug} item={c} index={i} />
           ))}
         </div>
       </div>
@@ -226,22 +212,22 @@ export function ContactCta() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="display mt-10 text-[clamp(2.4rem,6vw,4.6rem)] text-ivory">
-            Begin a <span className="italic text-lustre">commission</span>
+            Start a <span className="italic text-lustre">conversation</span>
           </h2>
         </Reveal>
         <Reveal delay={180}>
           <p className="mx-auto mt-7 max-w-xl font-sans text-base leading-relaxed text-ivory/55">
-            Bring a stone, an idea, or an inherited piece that deserves another life. The first
-            conversation is unhurried and costs nothing.
+            Whether you are buying for a shop floor or for one person, tell us what you are after
+            and we will tell you what it costs today.
           </p>
         </Reveal>
         <Reveal delay={260}>
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Link href="/contact" className="btn bg-gold text-onyx hover:bg-ivory">
-              Request an appointment
+              Make an enquiry
             </Link>
-            <Link href="/atelier" className="btn-ghost-dark">
-              Inside the atelier
+            <Link href="/education" className="btn-ghost-dark">
+              Learn about stones
             </Link>
           </div>
         </Reveal>

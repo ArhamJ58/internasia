@@ -1,18 +1,21 @@
 /**
- * Content for the buyer's guide at /guide.
+ * Content for the education section at /education.
  *
- * All of it is original writing about how diamonds are graded, made, certified
- * and sized. The grading scales (GIA D–Z colour, FL–I clarity) and the
- * Japanese ring size standard are published industry facts, not claims about
- * Saii Jewels — nothing here needs the company to verify it.
+ * All of it is original writing about how diamonds are graded, grown,
+ * certified and sized. The grading scales (GIA D–Z colour, FL–I clarity) and
+ * the Japanese ring size standard are published industry facts, not claims
+ * about Saii Jewels — nothing here needs the company to verify it.
  *
- * The one thing to check before launch is `certification.labs`: it lists which
- * laboratories' reports the atelier actually works with, which is a business
- * fact rather than a general one. See the note there.
+ * The one thing to check before launch is `certification.labs`: which
+ * laboratories' reports the business actually supplies is a fact about the
+ * business rather than a general one. See the note there.
+ *
+ * Saii Jewels trades in stones and jewellery; it does not manufacture. Keep
+ * this section about how to judge and buy a stone, never about making one.
  */
 
-export const guideIntro =
-  'Most of what makes one diamond cost several times another is invisible until somebody shows you where to look. This is what we explain across the bench when a client is choosing a stone, written down.';
+export const educationIntro =
+  'Most of what makes one diamond cost several times another is invisible until somebody shows you where to look. This is what we go through with a buyer choosing a stone, written down.';
 
 /* ── The four Cs ──────────────────────────────────────────── */
 
@@ -78,10 +81,56 @@ export const clarityScale = [
   { grade: 'I1 – I3', name: 'Included', visible: 'Visible without magnification' },
 ];
 
+/* ── Shapes ───────────────────────────────────────────────── */
+
+/**
+ * The four cuts the business works in most. These previously lived on their
+ * own page, which duplicated the collection; they belong here, where someone
+ * is deciding what to buy rather than looking at what is for sale.
+ */
+export const shapes = [
+  {
+    slug: 'brilliant',
+    cut: 'brilliant' as const,
+    name: 'Round brilliant',
+    nameJa: 'ラウンドブリリアント',
+    accent: '#EAF2F7',
+    caption: 'The single stone, uninterrupted',
+    body: 'Fifty-seven facets arranged to throw back as much light as possible, and by a wide margin the most bought shape in the world. It hides colour and inclusions better than any other cut, which means a round brilliant can carry a lower colour or clarity grade and still face up beautifully.',
+  },
+  {
+    slug: 'emerald',
+    cut: 'emerald' as const,
+    name: 'Emerald cut',
+    nameJa: 'エメラルドカット',
+    accent: '#CFE6D8',
+    caption: 'Step cuts, long shadows',
+    body: 'Broad parallel facets and a wide open table. A step cut trades fire for clarity — instead of sparkle you get depth, and the eye travels straight down into the stone. The same openness shows every inclusion, so clarity matters more here than in any other shape.',
+  },
+  {
+    slug: 'marquise',
+    cut: 'marquise' as const,
+    name: 'Marquise',
+    nameJa: 'マーキス',
+    accent: '#F3E3EC',
+    caption: 'Length, drawn to a point',
+    body: 'Cut long and finished at two fine points, a marquise lengthens the finger and looks larger than its weight because so much of it sits face-up. The points are the vulnerable part and want a setting that covers them.',
+  },
+  {
+    slug: 'pear',
+    cut: 'pear' as const,
+    name: 'Pear',
+    nameJa: 'ペアシェイプ',
+    accent: '#F6EEDC',
+    caption: 'Half brilliant, half repose',
+    body: 'One rounded shoulder and one point — the fire of a brilliant with the calm of a drop. It hangs better than any other shape, which is why it has never left the pendant, and it also flatters the hand set point-up.',
+  },
+];
+
 /* ── Grown and mined ──────────────────────────────────────── */
 
-export const grown = {
-  title: 'Grown and mined',
+export const origin = {
+  title: 'Natural and laboratory-grown',
   lede: 'A laboratory-grown diamond is a diamond. It is the same crystal, the same hardness and the same optical behaviour as one taken out of the ground — the difference is where the carbon came together, and what that does to the price.',
   methods: [
     {
@@ -104,7 +153,7 @@ export const grown = {
     { property: 'Resale', mined: 'An established secondary market', lab: 'Thin, and still settling' },
   ],
   position:
-    'We work in both and will tell you plainly which we think suits the piece and the budget. A laboratory stone buys you considerably more size and clarity for the same money; a mined stone holds value in a way the laboratory market has not yet demonstrated. Neither answer is the right one for everybody.',
+    'We supply both and will tell you plainly which suits the piece and the budget. A laboratory stone buys you considerably more size and clarity for the same money; a mined stone holds value in a way the laboratory market has not yet demonstrated. Neither answer is the right one for everybody.',
 };
 
 /* ── Certification ────────────────────────────────────────── */
@@ -192,7 +241,7 @@ export const sizing = {
     'The knuckle, not the base of the finger, decides the size — the ring has to pass it and then sit without spinning.',
     'A plain band can usually be resized by two or three sizes. A ring set all the way round with stones often cannot be resized at all, so it is worth getting right the first time.',
   ],
-  cta: 'We size on a proper mandrel at the atelier, which takes a minute and removes the guesswork.',
+  cta: 'We can measure you properly at the office, which takes a minute and removes the guesswork.',
 };
 
 /* ── Care ─────────────────────────────────────────────────── */
@@ -211,16 +260,16 @@ export const care = [
     body: 'Separately, and soft-lined. A diamond is the hardest thing in the box and will scratch every other stone in it, including other diamonds.',
   },
   {
-    title: 'When to bring it in',
-    body: 'Once a year for anything worn daily. We check the claws under magnification, tighten what has moved and re-polish the metal. Almost every lost stone gives warning first, as a claw that has worn thin or lifted.',
+    title: 'Have the claws checked',
+    body: 'Once a year for anything worn daily, by whoever you bought it from or any competent jeweller. Almost every lost stone gives warning first, as a claw that has worn thin or lifted — and it is a five-minute job to catch and a very expensive one to miss.',
   },
 ];
 
-export const guideSections = [
+export const sections = [
   { id: 'four-cs', label: 'The four Cs' },
   { id: 'shapes', label: 'Shapes' },
-  { id: 'grown', label: 'Grown & mined' },
-  { id: 'certification', label: 'Certification' },
+  { id: 'origin', label: 'Natural & lab-grown' },
+  { id: 'certificates', label: 'Certificates' },
   { id: 'metals', label: 'Metals' },
   { id: 'sizing', label: 'Ring size' },
   { id: 'care', label: 'Care' },
