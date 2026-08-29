@@ -8,6 +8,10 @@ import './globals.css';
 const display = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
+  // Italic is load-bearing here — the hero, the section headings and the pull
+  // quotes all use it — so the real italics are loaded rather than letting the
+  // browser slant the upright faces.
+  style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
 });
