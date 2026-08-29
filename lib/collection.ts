@@ -8,6 +8,10 @@
  *  manufacture them. Nothing here claims the business cuts, sets or
  *  polishes anything, and nothing here should be edited to say so.
  *
+ *  It also deals in NATURAL stones only. The education section explains
+ *  laboratory-grown diamonds because buyers need to understand the choice,
+ *  but nothing in this file should offer one for sale.
+ *
  *  These are written as REPRESENTATIVE ITEMS — the kinds of piece the
  *  business supplies, and the specifications a buyer would ask about —
  *  rather than as live stock. That is honest for a trading house without
@@ -71,13 +75,13 @@ export const items: Item[] = [
     caption: 'Six-claw · platinum 950',
     body: [
       'The most asked-for ring in Japan and the one most worth getting right. A six-claw head holds more securely than four and spreads the pressure around the girdle, which matters on a stone worn every day.',
-      'Supplied set with a stone of your choosing, or as a mount for a stone you already own. Both natural and laboratory-grown diamonds are available, and we will show you what the same budget buys in each.',
+      'Supplied set with a stone of your choosing, or as a mount for a stone you already own. We will show you what the budget you have in mind actually buys, and where spending a little more or a little less changes what you see on the hand.',
     ],
     specs: [
       { label: 'Head', value: 'Six-claw, open gallery' },
       { label: 'Metal', value: 'Platinum 950, or 18k on request' },
       { label: 'Stone', value: 'Round brilliant, 0.30 ct upward' },
-      { label: 'Origin', value: 'Natural or laboratory-grown' },
+      { label: 'Origin', value: 'Natural' },
       { label: 'Certificate', value: 'Supplied with the stone where it carries one' },
       { label: 'Sizing', value: 'Japanese sizes 5 – 23' },
       { label: 'Supply', value: 'Wholesale and retail' },
@@ -182,16 +186,16 @@ export const items: Item[] = [
     cut: 'brilliant',
     accent: '#EAF2F7',
     layout: 'loose',
-    caption: 'Natural & laboratory-grown · certificated',
+    caption: 'Natural · certificated',
     body: [
-      'Stones held loose, in every shape on this site and a good many that are not. Natural and laboratory-grown, and we are straightforward about which is which and what each is worth.',
+      'Stones held loose, in every shape on this site and a good many that are not. Natural stones, supplied with their reports.',
       'Loose is how a stone should be judged — in the hand, in daylight, against others of its grade, before any decision is made about a setting. Bring a certificate you are considering elsewhere and we will read it with you.',
     ],
     specs: [
       { label: 'Shapes', value: 'Round, emerald, marquise, pear, oval, princess' },
-      { label: 'Origin', value: 'Natural and laboratory-grown' },
+      { label: 'Origin', value: 'Natural' },
       { label: 'Weight', value: 'From 0.20 ct; larger stones sourced to order' },
-      { label: 'Certificates', value: 'GIA, CGL, AGT and IGI reports' },
+      { label: 'Certificates', value: 'GIA, CGL and AGT reports' },
       { label: 'Coloured stones', value: 'Sapphire, ruby and emerald also held' },
       { label: 'Supply', value: 'Wholesale and retail' },
     ],
@@ -208,4 +212,4 @@ export const collectionIntro =
  * house, and the thing most likely to start a conversation.
  */
 export const priceNote =
-  'Prices move with the market and with the individual stone, so nothing here carries a fixed figure. Tell us the shape, the rough weight and the budget you have in mind, and we will come back with what that buys today — in both natural and laboratory-grown stones, so you can see the difference.';
+  'Prices move with the market and with the individual stone, so nothing here carries a fixed figure. Tell us the shape, the rough weight and the budget you have in mind, and we will come back with what that buys today.';

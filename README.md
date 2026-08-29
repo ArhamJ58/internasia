@@ -5,9 +5,17 @@ house in Higashi-Ueno (Okachimachi), Taito-ku, Tokyo.
 
 **What the business is:** a jewellery trading house. It buys and sells loose
 diamonds, coloured gemstones and finished jewellery — wholesale to the trade,
-retail to private clients. It does **not** manufacture: there is no workshop,
-no bench, no setting or polishing. Nothing on this site should ever claim
-otherwise, and the copy is written to keep that line clear.
+retail to private clients.
+
+Two lines the copy is written to hold, both stated at the top of
+`lib/content.ts` so they do not drift:
+
+- It does **not** manufacture. No workshop, no bench, no setting or polishing.
+- It deals in **natural stones only**. The education section still teaches
+  laboratory-grown diamonds — HPHT, CVD and the honest comparison — because it
+  is the decision every diamond buyer now faces and a buyer who does not
+  understand it is easy to mislead. But nothing on the site offers one for
+  sale, and `origin.position` says plainly that this is not what we trade in.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS. Every page is
 statically prerendered, so the whole site can be served from a CDN.
@@ -57,9 +65,11 @@ Two things to check, both marked `TODO` in the source:
   what the business supplies, not as live stock, and none carries a price.
   Replace them with what you actually deal in and give them your own reference
   numbers. The header comment explains what was left out and why.
-- **`certification.labs`** in `lib/education.ts` — the four laboratories listed
-  are the ones whose reports circulate most widely in the Tokyo trade. Cut any
-  whose reports you do not actually supply.
+- **Certificates.** `certification.labs` in `lib/education.ts` is educational —
+  the reports a buyer will come across, IGI included, which is why it is not
+  a claim about what you supply. The supply claim lives in `lib/collection.ts`
+  under the loose stones item (`GIA, CGL and AGT reports`); correct that one
+  if it is wrong.
 
 Separately, the marks band on the home page (`marks`) deliberately avoids the
 claims a jewellery site usually leads with — year founded, certifications,

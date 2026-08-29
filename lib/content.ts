@@ -11,8 +11,10 @@
  *  (Okachimachi), Tokyo — wholesale supply to the trade, and retail to
  *  private clients. It buys and sells loose diamonds, coloured gemstones
  *  and finished jewellery. It does NOT run a workshop and does not
- *  manufacture: there is no bench, no setting, no polishing. Nothing on
- *  this site should claim otherwise.
+ *  manufacture: there is no bench, no setting, no polishing. It also deals
+ *  in NATURAL stones only — the education section covers laboratory-grown
+ *  diamonds because buyers need to understand the choice, but the business
+ *  does not sell them. Nothing on this site should claim otherwise.
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -93,7 +95,7 @@ export const services = [
   },
   {
     title: 'Loose diamonds & gemstones',
-    body: 'Diamonds and coloured stones held loose, natural and laboratory-grown, viewed in daylight and supplied with their reports.',
+    body: 'Natural diamonds and coloured stones held loose, viewed in daylight and supplied with their reports.',
   },
   {
     title: 'Sourcing to order',

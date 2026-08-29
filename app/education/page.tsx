@@ -172,6 +172,9 @@ export default function EducationPage() {
             {/* ── Certificates ─────────────────────────────── */}
             <Section id="certificates" title={certification.title} lede={certification.lede}>
               <Reveal>
+                <p className="mb-6 max-w-2xl font-sans text-sm leading-relaxed text-muted">
+                  {certification.labsLede}
+                </p>
                 <div className="flex flex-wrap gap-2.5">
                   {certification.labs.map((l) => (
                     <span

@@ -12,6 +12,11 @@
  *
  * Saii Jewels trades in stones and jewellery; it does not manufacture. Keep
  * this section about how to judge and buy a stone, never about making one.
+ *
+ * The business deals in NATURAL stones only. The laboratory-grown material
+ * below is deliberately kept — it is the decision every diamond buyer now
+ * has to make, and a buyer who does not understand it is easy to mislead.
+ * It is written to inform, not to sell: see `origin.position`.
  */
 
 export const educationIntro =
@@ -152,8 +157,14 @@ export const origin = {
     { property: 'Typical price', mined: 'Higher, and tied to supply', lab: 'Substantially lower for like for like' },
     { property: 'Resale', mined: 'An established secondary market', lab: 'Thin, and still settling' },
   ],
+  /**
+   * Where the house stands. Saii Jewels deals in natural stones only, so this
+   * must not offer a laboratory-grown one — but the comparison above stays,
+   * because it is a real decision every buyer now faces and they are better
+   * served knowing it than being steered past it.
+   */
   position:
-    'We supply both and will tell you plainly which suits the piece and the budget. A laboratory stone buys you considerably more size and clarity for the same money; a mined stone holds value in a way the laboratory market has not yet demonstrated. Neither answer is the right one for everybody.',
+    'Saii Jewels deals in natural stones. That is not a verdict on laboratory-grown diamonds — they are real diamonds, and for a buyer who wants the most size and clarity for the money they are a reasonable answer. It is simply not what we trade in, and you should hear that from us rather than find it out later.',
 };
 
 /* ── Certification ────────────────────────────────────────── */
@@ -162,15 +173,17 @@ export const certification = {
   title: 'Reading a report',
   lede: 'A grading report is an independent opinion on a stone, issued by a laboratory that never owns it. It is not a valuation and it is not a guarantee — it is a description precise enough that you can compare two stones you cannot hold at the same time.',
   /**
-   * TODO — confirm which laboratories Saii Jewels actually supplies reports
-   * from, and cut any that do not apply. The four below are the ones whose
-   * reports circulate most widely in the Tokyo trade.
+   * The reports a buyer will actually come across, not a list of what this
+   * business supplies — that claim belongs in `lib/collection.ts`, and IGI is
+   * here because a buyer will meet it elsewhere, most often on a
+   * laboratory-grown stone.
    */
+  labsLede: 'The four whose reports circulate most widely. Whoever issued it, the number on the paper should match the number inscribed on the girdle.',
   labs: [
     { abbr: 'GIA', name: 'Gemological Institute of America', note: 'The scale everyone else is measured against.' },
     { abbr: 'CGL', name: 'Central Gem Laboratory · 中央宝石研究所', note: 'The most widely held report in Japan.' },
     { abbr: 'AGT', name: 'AGT Gem Laboratory · AGTジェムラボラトリー', note: 'Long established in the Tokyo trade.' },
-    { abbr: 'IGI', name: 'International Gemological Institute', note: 'Common on laboratory-grown stones.' },
+    { abbr: 'IGI', name: 'International Gemological Institute', note: 'Most often seen on laboratory-grown stones.' },
   ],
   reading: [
     { field: 'Shape and cutting style', body: 'Round brilliant, emerald cut, and so on — with the measurements in millimetres.' },
