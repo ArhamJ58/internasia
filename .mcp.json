@@ -2,11 +2,11 @@
   "mcpServers": {
     "perplexity": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@perplexity-ai/mcp-server"],
-      "env": {
-        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
-      }
+      "command": "sh",
+      "args": [
+        "-c",
+        "K=\"$PERPLEXITY_API_KEY\"; if [ -f .env ]; then set -a; . ./.env; set +a; fi; export PERPLEXITY_API_KEY=\"${PERPLEXITY_API_KEY:-$K}\"; exec npx -y @perplexity-ai/mcp-server"
+      ]
     }
   }
 }
